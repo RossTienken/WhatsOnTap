@@ -1,0 +1,2 @@
+dependencies: \
+  /Users/rosstienken/g68/capstone/WhatsOnTap/ReactNative/ios/build/Build/Intermediates.noindex/react_native_redux_firebase_boilerplate.build/Debug-iphonesimulator/react_native_redux_firebase_boilerplate.build/DerivedSources/react_native_redux_firebase_boilerplate_vers.c

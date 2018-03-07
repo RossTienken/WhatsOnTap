@@ -8,8 +8,16 @@
     "dev": "nodemon index.js"
   },
   "dependencies": {
+    "body-parser": "^1.18.2",
+    "cookie-parser": "^1.4.3",
     "express": "^4.16.2",
     "firebase": "^4.10.1",
-    "firebase-admin": "^5.9.1"
+    "firebase-admin": "^5.9.1",
+    "knex": "^0.14.4",
+    "knex-csv-seeder": "^0.4.1",
+    "morgan": "^1.9.0",
+    "npm": "^5.7.1",
+    "pg": "^7.4.1",
+    "pgloader": "^1.1.6"
   }
 }

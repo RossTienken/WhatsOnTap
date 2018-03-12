@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "node index.js",
+    "start": "nodemon index.js",
     "dev": "nodemon index.js"
   },
   "dependencies": {
@@ -13,11 +13,14 @@
     "express": "^4.16.2",
     "firebase": "^4.10.1",
     "firebase-admin": "^5.9.1",
+    "jade": "^1.11.0",
     "knex": "^0.14.4",
     "knex-csv-seeder": "^0.4.1",
     "morgan": "^1.9.0",
+    "nodemon": "^1.17.1",
     "npm": "^5.7.1",
     "pg": "^7.4.1",
-    "pgloader": "^1.1.6"
+    "pgloader": "^1.1.6",
+    "serve-favicon": "^2.4.5"
   }
 }

@@ -5,20 +5,17 @@ import { createStore, applyMiddleware } from 'redux'
 import firebase from 'firebase'
 import ReduxThunk from 'redux-thunk'
 import reducers from './reducers'
+import config from '../firebaseConfig'
+
+
 import LoginForm from './components/LoginForm'
+import FluxRouter from './components/FluxRouter'
 
 class App extends Component {
-  componentWillMount() {
-    // make new web proj in firebase
-    // const config = {
-    //   apiKey: '',
-    //   authDomain: '',
-    //   databaseURL: '',
-    //   projectId: '',
-    //   storageBucket: '',
-    //   messagingSenderId: ''
-    // }
-    // firebase.initializeApp(config)
+  componentWillMount(){
+    if (!firebase.apps.length) {
+      firebase.initializeApp(config)
+    }
   }
 
   render() {
@@ -26,7 +23,7 @@ class App extends Component {
     const store = createStore(reducers, {}, applyMiddleware(ReduxThunk))
     return (
       <Provider store={ store }>
-        <LoginForm />
+        <FluxRouter />
       </Provider>
     )
   }

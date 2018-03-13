@@ -12,19 +12,13 @@ class Search extends Component {
   componentWillMount = () => {
   }
 
-  componentDidMount = () => {
-    console.log(this.props)
-  }
-
   onSearchChange = (text) => {
     this.props.searchChanged(text)
   }
 
   onButtonPress = () => {
-    const { searchText, zipCode } = this.props
-    let x = this.getZipCodes(zipCode)
-    console.log(x)
-    this.props.searchBarInput(searchText, zipCode)
+    const { searchText, zipCodes } = this.props
+    this.props.searchBarInput(searchText, zipCodes)
   }
 
   renderError = () => {
@@ -61,6 +55,7 @@ class Search extends Component {
         <CardSection style={{marginTop:15}}>
           <InputNoLab
             placeholder='Beer or Brewery'
+            value='mod'
             onChangeText ={ this.onSearchChange }
           />
         </CardSection>

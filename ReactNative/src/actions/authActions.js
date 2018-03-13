@@ -24,7 +24,7 @@ const apiGetRequest = (dispatch, token, zipCode) => {
   axios.get(getURL, {headers:{ 'x-access-token':token }})
   .then(response => {
     let userID = response.data.id
-    axios.get(`https://www.zipcodeapi.com/rest/H7xRjkDn8Ec9JMuonKjS8J2ayTJLJZFWWGFxRRG8fUSeUxyMXAiKm7jaABikA4Z3/radius.json/${zip}/7/mile?minimal`)
+    axios.get(`https://www.zipcodeapi.com/rest/U0TbVzcpXEiHWVtND365I6iDWFJjAQnolonrdqRVuHRiOSgDDz2RbG8Zi0eEvdL4/radius.json/${zip}/7/mile?minimal`)
       .then(zipData => {
         let zips = zipData.data.zip_codes
         loginUserSuccess(dispatch, userID, token, zips)
@@ -45,7 +45,7 @@ const apiPostRequest = (dispatch, token, zipCode) => {
   axios.post(postURL, postBody, {headers:{'x-access-token':token}})
   .then(response => {
     let userID = response.data.id
-    axios.get(`https://www.zipcodeapi.com/rest/H7xRjkDn8Ec9JMuonKjS8J2ayTJLJZFWWGFxRRG8fUSeUxyMXAiKm7jaABikA4Z3/radius.json/${zip}/7/mile?minimal`)
+    axios.get(`Request URL https://www.zipcodeapi.com/rest/U0TbVzcpXEiHWVtND365I6iDWFJjAQnolonrdqRVuHRiOSgDDz2RbG8Zi0eEvdL4/radius.json/${zip}/7/mile?minimal`)
       .then(zipData => {
         let zips = zipData.data.zip_codes
         loginUserSuccess(dispatch, userID, token, zips)
@@ -89,7 +89,7 @@ const loginUserSuccess = (dispatch, userID, token, zips) => {
     type: LOGIN_USER_SUCCESS,
     payload: { userID, token, zips }
   })
-  Actions.tabNavigator()
+  Actions.search()
 }
 
 // ZIP ACTIONS //

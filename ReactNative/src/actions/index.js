@@ -1,2 +1,2 @@
 export * from './authActions'
-export * from './search'
+export * from './searchActions'

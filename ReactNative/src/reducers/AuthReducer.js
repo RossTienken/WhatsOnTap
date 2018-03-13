@@ -1,15 +1,20 @@
-import { EMAIL_CHANGED, PASSWORD_CHANGED, LOGIN_USER_SUCCESS, LOGIN_USER_FAIL, LOGIN_USER, SEARCH_BEERS, SEARCH_CHANGED, ZIP_CHANGED, GET_ZIPS } from '../actions/types'
+import { EMAIL_CHANGED, PASSWORD_CHANGED, LOGIN_USER_SUCCESS, LOGIN_USER_FAIL, LOGIN_USER, SEARCH_BEERS, SEARCH_CHANGED, ZIP_CHANGED, GET_ZIPS, GET_LABELS } from '../actions/types'
+
+import { filtBeer, filtBrew, labs, zipCs } from '../../default'
 
 const INITIAL_STATE = {
   token: '',
   email: 'ross@ross.com',
   password: 'password',
   zipCode: '80301',
-  zipCodes: [],
+  zipCodes: zipCs,
   userID: null,
   error: '',
   loading: false,
-  searchText: ''
+  filteredBeers: filtBeer,
+  filteredBreweries: filtBrew,
+  searchText: 'mod',
+  labels: labs
 }
 
 export default (state = INITIAL_STATE, action) => {
@@ -29,7 +34,7 @@ export default (state = INITIAL_STATE, action) => {
     case ZIP_CHANGED:
     return { ...state, zipCode: action.payload }
     case SEARCH_BEERS:
-      return { ...state, filteredBeers: action.payload }
+    return { ...state, filteredBeers: action.payload.beersFiltered, filteredBreweries: action.payload.breweriesFiltered, labels: action.payload.labels }
     default:
      return state
   }

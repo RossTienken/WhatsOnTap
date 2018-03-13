@@ -13,7 +13,8 @@ const styles = StyleSheet.create({
   containerStyle: {
     marginLeft: 10,
     marginRight: 10,
-    marginTop: 5,
+    marginTop: 2,
+    marginBottom: 2,
     borderBottomWidth: 1,
     padding: 5,
     borderRadius: 5,

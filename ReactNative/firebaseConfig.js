@@ -6,3 +6,7 @@ export const config = {
   storageBucket: "whatsontap-1f4d7.appspot.com",
   messagingSenderId: "581502806191"
 }
+
+export const apiKey = {
+  key: '0e82fd500cf93dc9e0c1ffb9d14d2bc6'
+}

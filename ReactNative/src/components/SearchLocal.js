@@ -5,7 +5,7 @@ import { View, Text, FlatList, Image, KeyboardAvoidingView, ScrollView, Touchabl
 import { connect } from 'react-redux'
 import  axios  from 'axios'
 import { Card, CardSection, Input, InputNoLab, Button, Toolbar, RenderUserRow, Spinner } from './common'
-import { loadingTrue, searchBarInput, searchChanged, zipChanged } from '../actions'
+import { loadingTrue, searchLocal, zipChanged } from '../actions'
 
 class SearchLocal extends Component {
 
@@ -51,8 +51,15 @@ class SearchLocal extends Component {
   render() {
     return (
       <KeyboardAvoidingView behavior={"padding"} style={styles.container}>
+      <Image style={{ height: '100%', width: '100%', position:'absolute'}} source={require('../../public/img/localBack.png')} />
+      <Image style={{ height: '100%',
+                      width: '100%',
+                      position:'absolute',
+                      opacity: 0.75 }}
+        source={{ uri: 'https://community.avid.com/cfs-filesystemfile.ashx/__key/CommunityServer.Components.PostAttachments/00.00.60.24.69/Sequence-01_5F00_1.jpg' }}
+        />
       <ScrollView>
-      <Text style={{alignSelf:'center', textAlign:'center', fontSize:35, marginTop:65, marginBottom:20, fontWeight:'bold', color:'#e6e6e6'}}>{"Search Locally!"}</Text>
+      <Text style={{alignSelf:'center', textAlign:'center', fontSize:35, marginTop:65, marginBottom:20, fontWeight:'bold', color:'#e6e6e6', backgroundColor:'transparent'}}>{"Search Locally!"}</Text>
         <CardSection style={{marginTop:15}}>
           <Input
             label='ZIP'
@@ -71,7 +78,7 @@ class SearchLocal extends Component {
 }
 
 mapStateToProps = state => {
-  const { loading, zipCode } = state.auth
+  const { loading, zipCode } = state.search
   return {
     loading,
     zipCode

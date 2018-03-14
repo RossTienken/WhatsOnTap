@@ -1,21 +1,13 @@
-import { EMAIL_CHANGED, PASSWORD_CHANGED, LOGIN_USER_SUCCESS, LOGIN_USER_FAIL, LOGIN_USER, SEARCH_BEERS, SEARCH_CHANGED, ZIP_CHANGED, GET_ZIPS, LOADING_TRUE, LOADING_FALSE } from '../actions/types'
-
-import { filtBeer, filtBrew, labs, zipCs, filtBrewNames } from '../../default'
+import { EMAIL_CHANGED, PASSWORD_CHANGED, LOGIN_USER_SUCCESS, LOGIN_USER_FAIL, LOGIN_USER, LOADING_TRUE, LOADING_FALSE } from '../actions/types'
 
 const INITIAL_STATE = {
   token: '',
   email: 'ross@ross.com',
   password: 'password',
-  zipCode: '80301',
-  zipCodes: zipCs,
   userID: null,
   error: '',
   loading: false,
-  filteredBeers: filtBeer,
-  filteredBreweries: filtBrew,
-  searchText: 'mod',
-  labels: labs,
-  breweryNames: filtBrewNames
+  searchText: 'mod'
 }
 
 export default (state = INITIAL_STATE, action) => {
@@ -25,7 +17,7 @@ export default (state = INITIAL_STATE, action) => {
     case PASSWORD_CHANGED:
     return { ...state, password: action.payload }
     case LOGIN_USER_SUCCESS:
-    return { ...INITIAL_STATE, userID: action.payload.userID, token:action.payload.token, error: '', loading:false, zipCodes: action.payload.zips }
+    return { ...INITIAL_STATE, userID: action.payload.userID, token:action.payload.token, error: '', loading:false }
     case LOGIN_USER_FAIL:
     return { ...state, error: 'Authentication Failed.', loading:false }
     case LOGIN_USER:
@@ -34,12 +26,6 @@ export default (state = INITIAL_STATE, action) => {
     return {...state, loading: true}
     case LOADING_FALSE:
     return {...state, loading: false}
-    case SEARCH_CHANGED:
-    return { ...state, searchText: action.payload }
-    case ZIP_CHANGED:
-    return { ...state, zipCode: action.payload }
-    case SEARCH_BEERS:
-    return { ...state, filteredBeers: action.payload.beersFiltered, filteredBreweries: action.payload.breweriesFiltered, labels: action.payload.labels, breweryNames: action.payload.brewNames }
     default:
      return state
   }

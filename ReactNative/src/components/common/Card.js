@@ -11,13 +11,18 @@ const Card = (props) => {
 
 const styles = StyleSheet.create({
   containerStyle: {
-    borderColor: '#505050',
+    marginLeft: 10,
+    marginRight: 10,
+    marginTop: 2,
+    marginBottom: 2,
     borderBottomWidth: 1,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 2,
-    elevation: 1,
+    padding: 5,
+    borderRadius: 5,
+    backgroundColor: '#5d5d5d',
+    justifyContent: 'flex-start',
+    flexDirection: 'row',
+    borderColor: '#5d5d5d',
+    position: 'relative'
   }
 })
 

@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import {  View, KeyboardAvoidingView, ScrollView, Text, Image} from 'react-native'
 import { connect } from 'react-redux'
 import actions from 'react-native-router-flux'
-import { Card, CardSection, Input, Button, Spinner } from './common'
-import { emailChanged, passwordChanged, loginUser, loginUserFail, zipChanged, getZipCodes } from '../actions'
+import { Card, Input, Button, Spinner } from './common'
+import { emailChanged, passwordChanged, loginUser, loginUserFail } from '../actions'
 
 class LoginForm extends Component {
 
@@ -13,10 +13,6 @@ class LoginForm extends Component {
 
   onPasswordChange(text){
     this.props.passwordChanged(text)
-  }
-
-  onZipChange = (text) => {
-    this.props.zipChanged(text)
   }
 
   onButtonPress(){
@@ -59,7 +55,7 @@ class LoginForm extends Component {
       style={{width:200,height:200, alignSelf:'center', marginBottom:20, marginTop:10}}
       source={require('../../mug.png')}
       />
-        <CardSection style={{marginTop:15}}>
+        <Card style={{marginTop:15}}>
           <Input
             label='Email'
             placeholder='email@gmail.com'
@@ -67,8 +63,8 @@ class LoginForm extends Component {
             onChangeText ={ this.onEmailChange.bind(this) }
             value ={ this.props.email }
             />
-        </CardSection>
-        <CardSection>
+        </Card>
+        <Card>
           <Input
             secureTextEntry
             label='Password'
@@ -77,15 +73,7 @@ class LoginForm extends Component {
             onChangeText={ this.onPasswordChange.bind(this) }
             value ={ this.props.password }
             />
-        </CardSection>
-        <CardSection style={{marginTop:15}}>
-          <Input
-            label='ZIP'
-            placeholder='ZIP'
-            onChangeText ={ this.onZipChange }
-            value ={ this.props.zipCode }
-          />
-        </CardSection>
+        </Card>
           { this.renderError() }
         <View style={styles.viewStyle}>
           { this.renderButton() }
@@ -102,12 +90,10 @@ mapStateToProps = state => {
     email,
     password,
     error,
-    loading,
-    zipCode,
-    zipCodes
+    loading
   }
 }
-export default connect(mapStateToProps, { emailChanged, passwordChanged, loginUser, loginUserFail, zipChanged, getZipCodes })(LoginForm)
+export default connect(mapStateToProps, { emailChanged, passwordChanged, loginUser, loginUserFail })(LoginForm)
 
 const styles = {
   containerStyle:{

@@ -4,10 +4,10 @@ import { SearchBar } from 'react-native-elements'
 import { View, Text, FlatList, Image, KeyboardAvoidingView, ScrollView, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
 import  axios  from 'axios'
-import { Card, CardSection, Input, InputNoLab, Button, Toolbar, RenderUserRow } from './common'
-import { searchBarInput, searchChanged, zipChanged } from '../actions'
+import { CardRes, Input, InputNoLab, Button, Toolbar, RenderUserRow } from './common'
+import { } from '../actions'
 
-class Search extends Component {
+class ResultsBrew extends Component {
 
   componentWillMount = () => {
     console.log(this.props)
@@ -39,18 +39,18 @@ class Search extends Component {
       )
     }
   }
-  
+
   render() {
     return (
       <KeyboardAvoidingView behavior={"padding"} style={styles.container}>
       <ScrollView>
-        <Text style={{alignSelf:'center', textAlign:'center', fontSize:30, marginTop:65, marginBottom:20, fontWeight:'bold', color:'#e6e6e6'}}>{"Beers near you!"}</Text>
         <FlatList
-          data={this.props.filteredBeers}
+          style={{ marginTop: 25 }}
+          data={this.props.filteredBreweries}
           renderItem={ ({item}) =>
-          <Card>
+          <CardRes>
             <View>
-              <Image style={{ height: '100%', width: '100%', position:'absolute'}} source={{ uri: this.getLabel(item) }} />
+              <Image style={{ height: '100%', width: '100%', position:'absolute'}} source={require('../../public/img/brewLab.png')} />
               <Image style={{ height: '100%',
                               width: '100%',
                               position:'absolute',
@@ -70,23 +70,34 @@ class Search extends Component {
                                 fontWeight: 'bold',
                                 margin:5,
                                 backgroundColor:'transparent'}}>
-                                Brewery:
+                                City:
                                 </Text>
                 <Text style={{ color:'white',
                                 fontSize:17,
                                 fontWeight: 'bold',
                                 margin:5,
                                 backgroundColor:'transparent'}}>
-                                {this.getBrewery(item)}
+                                {item.city}
                                 </Text>
               </View>
-              <Text style={{ color:'white',
-                              fontSize:17,
-                              fontWeight: 'bold',
-                              margin:5,
-                              backgroundColor:'transparent'}}>abv:  {this.getABV(item)}%</Text>
+              <View style={{ flexDirection: 'row' }}>
+                <Text style={{ color:'white',
+                                fontSize:17,
+                                fontWeight: 'bold',
+                                margin:5,
+                                backgroundColor:'transparent'}}>
+                                Country:
+                                </Text>
+                <Text style={{ color:'white',
+                                fontSize:17,
+                                fontWeight: 'bold',
+                                margin:5,
+                                backgroundColor:'transparent'}}>
+                                {item.country}
+                                </Text>
+              </View>
             </View>
-          </Card>
+          </CardRes>
           }
           keyExtractor={(item, index) => index}
         />
@@ -97,21 +108,17 @@ class Search extends Component {
 }
 
 mapStateToProps = state => {
-  const { breweryNames, filteredBeers, filteredBreweries, labels, zipCodes } = state.auth
+  const { filteredBreweries } = state.search
   return {
-    breweryNames,
-    filteredBeers,
-    filteredBreweries,
-    labels,
-    zipCodes,
+    filteredBreweries
   }
 }
-export default connect(mapStateToProps, { })(Search)
+export default connect(mapStateToProps, { })(ResultsBrew)
 
 const styles = {
   container:{
     flex:1,
-    backgroundColor:'#505050',
+    backgroundColor:'black',
   },
   errorTextStyle:{
     fontSize: 20,

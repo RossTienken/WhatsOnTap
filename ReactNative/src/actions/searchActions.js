@@ -23,31 +23,46 @@ export const zipChanged = (text) => {
 }
 
 export const searchLocal = (zipCode) => {
-  let zip = parseInt(zipCode)
-  let breweriesFiltered
-  axios.get(`https://www.zipcodeapi.com/rest/U0TbVzcpXEiHWVtND365I6iDWFJjAQnolonrdqRVuHRiOSgDDz2RbG8Zi0eEvdL4/radius.json/${zip}/7/mile?minimal`)
+  return (dispatch) => {
+    let zip = parseInt(zipCode)
+    let localFiltered
+    axios.get(`https://www.zipcodeapi.com/rest/I9jaGFPg8FC3POl0eh76DWXK68FmZy3jvLJEBf59FLP8KBS7nadoS7Bo8JoS43x2/radius.json/${zip}/15/mile?minimal`)
     .then(zipData => {
-      let zips = zipData.data.zip_codes
+      let zipCodes = zipData.data.zip_codes
       axios.get('http://localhost:3000/breweries')
-        .then(response => {
-          breweriesFiltered = response.data.filter(brew => {
-            return (zipCodes.includes(brew.code))
-          })
-          dispatch({
-            type: SEARCH_LOCAL,
-            payload: { breweriesFiltered }
-          })
+      .then(response => {
+        localFiltered = response.data.filter(brew => {
+          return (zipCodes.includes(brew.code))
         })
-        .catch( error => {
-          console.log('error from apiGetRequest ==>', error);
-        })
+        timedLocal(dispatch, localFiltered)
+      })
+      .catch( error => {
+        console.log('error from apiGetRequest ==>', error);
+      })
     })
     .catch( error => {
       console.log('error from apiGetRequest ==>', error);
     })
+  }
 }
 
-export const searchBarInput = (text, zipCodes) => {
+export const searchBreweries = (text) => {
+  return (dispatch) => {
+    let breweriesFiltered
+    axios.get('http://localhost:3000/breweries')
+    .then(response => {
+      breweriesFiltered = response.data.filter(brew => {
+        return (brew.name.toLowerCase().includes(text.toLowerCase()))
+      })
+      timedBrew(dispatch, breweriesFiltered)
+    })
+    .catch( error => {
+      console.log('error from apiGetRequest ==>', error);
+    })
+  }
+}
+
+export const searchBeers = (text) => {
   return (dispatch)=>{
     let beersFiltered
     let labels = {}
@@ -75,7 +90,9 @@ export const searchBarInput = (text, zipCodes) => {
               if(!brewDB.data.data[0].labels.large) {
                 labels[beer.id] = 'https://cdn.pixabay.com/photo/2012/04/13/00/58/hops-31495_960_720.png'
               }
-              labels[beer.id] = brewDB.data.data[0].labels.large
+              else {
+                labels[beer.id] = brewDB.data.data[0].labels.large
+              }
             })
             .catch( error => {
               labels[beer.id] = labs[beer.id]
@@ -83,7 +100,7 @@ export const searchBarInput = (text, zipCodes) => {
         })
       })
       .then(() => {
-        timedDispatch(dispatch, beersFiltered, breweriesFiltered, labels, brewNames)
+        timedBeers(dispatch, beersFiltered, labels, brewNames)
       })
       .catch( error => {
         console.log('error from apiGetRequest ==>', error);
@@ -91,14 +108,38 @@ export const searchBarInput = (text, zipCodes) => {
   }
 }
 
-const timedDispatch = (dispatch, beersFiltered, breweriesFiltered, labels, brewNames) => {
+const timedBeers = (dispatch, beersFiltered, labels, brewNames) => {
   dispatch({
     type: SEARCH_BEERS,
-    payload: { beersFiltered, breweriesFiltered, labels, brewNames }
+    payload: { beersFiltered, labels, brewNames }
   })
   setTimeout(() => {
-    Actions.tabNavigator()
-    Actions.refresh({ key: 'Search' })
+    Actions.tabNavBeer()
+    Actions.refresh({ key: 'search' })
+    dispatch({ type: LOADING_FALSE })
+  }, 2000)
+}
+
+const timedBrew = (dispatch, breweriesFiltered) => {
+  dispatch({
+    type: SEARCH_BREWERIES,
+    payload: { breweriesFiltered }
+  })
+  setTimeout(() => {
+    Actions.tabNavBrew()
+    Actions.refresh({ key: 'search' })
+    dispatch({ type: LOADING_FALSE })
+  }, 2000)
+}
+
+const timedLocal = (dispatch, localFiltered) => {
+  dispatch({
+    type: SEARCH_LOCAL,
+    payload: { localFiltered }
+  })
+  setTimeout(() => {
+    Actions.tabNavLocal()
+    Actions.refresh({ key: 'search' })
     dispatch({ type: LOADING_FALSE })
   }, 2000)
 }

@@ -18,10 +18,10 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     padding: 5,
     borderRadius: 5,
-    backgroundColor: '#5d5d5d',
+    backgroundColor: '#50505080',
     justifyContent: 'flex-start',
     flexDirection: 'row',
-    borderColor: '#5d5d5d',
+    borderColor: 'transparent',
     position: 'relative'
   }
 })

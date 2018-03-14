@@ -15,6 +15,7 @@ const Input = ({
       <TextInput
         secureTextEntry={ secureTextEntry }
         placeholder={ placeholder }
+        placeholderTextColor='#ffffffb3'
         autoCorrect={ false }
         autoCapitalize="none"
         style={ inputStyle }
@@ -31,7 +32,7 @@ const styles = {
     color: 'white',
     paddingRight: 5,
     paddingLeft: 5,
-    fontSize: 18,
+    fontSize: 20,
     lineHeight: 23,
     flex: 2
   },

@@ -13,6 +13,7 @@ const InputNoLab = ({
       <TextInput
         secureTextEntry={ secureTextEntry }
         placeholder={ placeholder }
+        placeholderTextColor='#ffffffb3'
         autoCorrect={ false }
         autoCapitalize="none"
         style={ inputStyle }
@@ -27,9 +28,10 @@ const InputNoLab = ({
 const styles = {
   inputStyle: {
     color: 'white',
+    backgroundColor: 'transparent',
     paddingRight: 5,
     paddingLeft: 5,
-    fontSize: 18,
+    fontSize: 20,
     lineHeight: 23,
     flex: 2
   },
@@ -37,7 +39,8 @@ const styles = {
     height: 40,
     flex: 1,
     flexDirection: 'row',
-    alignItems: 'center'
+    alignItems: 'center',
+    backgroundColor: 'transparent'
   }
 }
 

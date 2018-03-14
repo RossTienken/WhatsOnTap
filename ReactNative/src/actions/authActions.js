@@ -2,7 +2,7 @@ import firebase from 'firebase'
 import axios from 'axios'
 import { Actions } from 'react-native-router-flux'
 
-import { EMAIL_CHANGED, PASSWORD_CHANGED, LOGIN_USER_SUCCESS, LOGIN_USER_FAIL, LOGIN_USER, SEARCH_CHANGED, SEARCH_BEERS, SEARCH_BREWERIES, ZIP_CHANGED } from './types'
+import { EMAIL_CHANGED, PASSWORD_CHANGED, LOGIN_USER_SUCCESS, LOGIN_USER_FAIL, LOGIN_USER } from './types'
 
 export const emailChanged = (text) => {
   return {
@@ -71,7 +71,7 @@ const loginUserFail = (dispatch) => {
 const loginUserSuccess = (dispatch, userID, token) => {
   dispatch({
     type: LOGIN_USER_SUCCESS,
-    payload: { userID, token, zips }
+    payload: { userID, token }
   })
   Actions.search()
 }

@@ -8,10 +8,10 @@ import getTheme from '../../native-base-theme/components'
 import platform from '../../native-base-theme/variables/platform'
 
 import SearchNav from './SearchNav'
-import Results from './Results'
+import ResultsBrew from './ResultsBrew'
 import Logout from './Logout'
 
-class TabNavigator extends Component {
+class TabNavBrew extends Component {
   render(){
     return(
       <StyleProvider style={getTheme(platform)}>
@@ -22,7 +22,7 @@ class TabNavigator extends Component {
             tabBarPosition='bottom'
           >
           <Tab heading={<TabHeading><Icon style={styles.mugStyle} name="ios-beer-outline" /><Text style={styles.textStyle}>Results</Text></TabHeading>} tabStyle={{backgroundColor: '#000'}}>
-            <Results />
+            <ResultsBrew />
           </Tab>
           <Tab heading={<TabHeading><Icon style={styles.searchStyle} name="ios-search" /><Text style={styles.textStyle}>Search</Text></TabHeading>} tabStyle={{backgroundColor: '#000'}}>
             <SearchNav />
@@ -52,4 +52,4 @@ const styles ={
   }
 }
 
-export default TabNavigator
+export default TabNavBrew

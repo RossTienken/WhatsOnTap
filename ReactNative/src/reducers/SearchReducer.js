@@ -3,13 +3,14 @@ import { SEARCH_BEERS, SEARCH_BREWERIES, SEARCH_LOCAL, SEARCH_CHANGED, ZIP_CHANG
 import { filtBeer, filtBrew, labs, zipCs, filtBrewNames } from '../../default'
 
 const INITIAL_STATE = {
-  zipCode: '80301',
+  zipCode: '',
   zipCodes: zipCs,
   error: '',
   loading: false,
   filteredBeers: filtBeer,
   filteredBreweries: filtBrew,
-  searchText: 'mod',
+  filteredLocal: filtBrew,
+  searchText: '',
   labels: labs,
   breweryNames: filtBrewNames
 }
@@ -23,13 +24,14 @@ export default (state = INITIAL_STATE, action) => {
     case SEARCH_CHANGED:
     return { ...state, searchText: action.payload }
     case ZIP_CHANGED:
+    console.log(action.payload)
     return { ...state, zipCode: action.payload }
     case SEARCH_BEERS:
-    return { ...state, filteredBeers: action.payload.beersFiltered, filteredBreweries: action.payload.breweriesFiltered, labels: action.payload.labels, breweryNames: action.payload.brewNames }
+    return { ...state, filteredBeers: action.payload.beersFiltered, labels: action.payload.labels, breweryNames: action.payload.brewNames, searchText: '' }
     case SEARCH_BREWERIES:
-    return { ...state, filteredBeers: action.payload.beersFiltered, filteredBreweries: action.payload.breweriesFiltered, labels: action.payload.labels, breweryNames: action.payload.brewNames }
+    return { ...state, filteredBeers: action.payload.beersFiltered, filteredBreweries: action.payload.breweriesFiltered, labels: action.payload.labels, breweryNames: action.payload.brewNames, searchText: '' }
     case SEARCH_LOCAL:
-    return { ...state, filteredBeers: action.payload.beersFiltered, filteredBreweries: action.payload.breweriesFiltered, labels: action.payload.labels, breweryNames: action.payload.brewNames }
+    return { ...state, filteredLocal: action.payload.localFiltered, labels: action.payload.labels }
     default:
      return state
   }

@@ -5,7 +5,7 @@ import { View, Text, FlatList, Image, KeyboardAvoidingView, ScrollView, Touchabl
 import { connect } from 'react-redux'
 import  axios  from 'axios'
 import { Card, CardSection, Input, InputNoLab, Button, Toolbar, RenderUserRow, Spinner } from './common'
-import { loadingTrue, searchBarInput, searchChanged, zipChanged } from '../actions'
+import { loadingTrue, searchBreweries, searchChanged } from '../actions'
 
 class SearchBrew extends Component {
 
@@ -17,9 +17,9 @@ class SearchBrew extends Component {
   }
 
   onButtonPress = () => {
-    const { searchText, zipCodes } = this.props
+    const { searchText } = this.props
     this.props.loadingTrue()
-    this.props.searchBarInput(searchText, zipCodes)
+    this.props.searchBreweries(searchText)
   }
 
   renderError = () => {
@@ -51,12 +51,19 @@ class SearchBrew extends Component {
   render() {
     return (
       <KeyboardAvoidingView behavior={"padding"} style={styles.container}>
+      <Image style={{ height: '100%', width: '100%', position:'absolute'}} source={require('../../public/img/brewBack.png')} />
+      <Image style={{ height: '100%',
+                      width: '100%',
+                      position:'absolute',
+                      opacity: 0.75 }}
+        source={{ uri: 'https://community.avid.com/cfs-filesystemfile.ashx/__key/CommunityServer.Components.PostAttachments/00.00.60.24.69/Sequence-01_5F00_1.jpg' }}
+        />
       <ScrollView>
-      <Text style={{alignSelf:'center', textAlign:'center', fontSize:35, marginTop:65, marginBottom:20, fontWeight:'bold', color:'#e6e6e6'}}>{"Search by Brewery!"}</Text>
+      <Text style={{alignSelf:'center', textAlign:'center', fontSize:35, marginTop:65, marginBottom:20, fontWeight:'bold', color:'#e6e6e6', backgroundColor:'transparent'}}>{"Search by Brewery!"}</Text>
         <CardSection style={{marginTop:15}}>
           <InputNoLab
             placeholder='Brewery Name'
-            value={this.props.searchText}
+            value={ this.props.searchText }
             onChangeText ={ this.onSearchChange }
           />
         </CardSection>
@@ -70,16 +77,13 @@ class SearchBrew extends Component {
 }
 
 mapStateToProps = state => {
-  const { loading, searchText, zipCode, zipCodes, token } = state.auth
+  const { loading, searchText } = state.search
   return {
     loading,
-    searchText,
-    zipCode,
-    zipCodes,
-    token
+    searchText
   }
 }
-export default connect(mapStateToProps, { loadingTrue, searchBarInput, searchChanged, zipChanged })(SearchBrew)
+export default connect(mapStateToProps, { loadingTrue, searchBreweries, searchChanged })(SearchBrew)
 
 const styles = {
   container:{

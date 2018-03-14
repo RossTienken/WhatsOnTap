@@ -15,9 +15,12 @@ class Search extends Component {
 
   getLabel = (item) => {
     let id = item.id
-    let catId = item.cat_id
-    if(!this.props.labels[id]) return this.props.labels[0]
     return this.props.labels[id]
+  }
+
+  getBrewery = (item) => {
+    let id = item.id
+    return this.props.breweryNames[id]
   }
 
   getABV = (item) => {
@@ -36,7 +39,7 @@ class Search extends Component {
       )
     }
   }
-
+  
   render() {
     return (
       <KeyboardAvoidingView behavior={"padding"} style={styles.container}>
@@ -55,20 +58,33 @@ class Search extends Component {
                 source={{ uri: 'https://community.avid.com/cfs-filesystemfile.ashx/__key/CommunityServer.Components.PostAttachments/00.00.60.24.69/Sequence-01_5F00_1.jpg' }}
                 />
               <Text style={{ color:'white',
-                              fontSize:20,
+                              fontSize:22,
                               fontWeight: 'bold',
                               margin:10,
                               backgroundColor: 'transparent'}}>
                               {item.name}
                               </Text>
+              <View style={{ flexDirection: 'row' }}>
+                <Text style={{ color:'white',
+                                fontSize:17,
+                                fontWeight: 'bold',
+                                margin:5,
+                                backgroundColor:'transparent'}}>
+                                Brewery:
+                                </Text>
+                <Text style={{ color:'white',
+                                fontSize:17,
+                                fontWeight: 'bold',
+                                margin:5,
+                                backgroundColor:'transparent'}}>
+                                {this.getBrewery(item)}
+                                </Text>
+              </View>
               <Text style={{ color:'white',
-                              textAlign: 'right',
-                              fontSize:20,
+                              fontSize:17,
                               fontWeight: 'bold',
-                              margin:10,
-                              backgroundColor:'transparent'}}>
-                              abv:  {this.getABV(item)}%
-                              </Text>
+                              margin:5,
+                              backgroundColor:'transparent'}}>abv:  {this.getABV(item)}%</Text>
             </View>
           </Card>
           }
@@ -81,15 +97,16 @@ class Search extends Component {
 }
 
 mapStateToProps = state => {
-  const { filteredBeers, filteredBreweries, labels, zipCodes } = state.auth
+  const { breweryNames, filteredBeers, filteredBreweries, labels, zipCodes } = state.auth
   return {
+    breweryNames,
     filteredBeers,
     filteredBreweries,
     labels,
     zipCodes,
   }
 }
-export default connect(mapStateToProps, { searchBarInput, searchChanged, zipChanged })(Search)
+export default connect(mapStateToProps, { })(Search)
 
 const styles = {
   container:{

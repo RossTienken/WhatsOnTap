@@ -4,8 +4,8 @@ import { SearchBar } from 'react-native-elements'
 import { View, Text, FlatList, Image, KeyboardAvoidingView, ScrollView, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
 import  axios  from 'axios'
-import { Card, CardSection, Input, InputNoLab, Button, Toolbar, RenderUserRow } from './common'
-import { searchBarInput, searchChanged, zipChanged } from '../actions'
+import { Card, CardSection, Input, InputNoLab, Button, Toolbar, RenderUserRow, Spinner } from './common'
+import { loadingTrue, searchBarInput, searchChanged, zipChanged } from '../actions'
 
 class Search extends Component {
 
@@ -18,6 +18,7 @@ class Search extends Component {
 
   onButtonPress = () => {
     const { searchText, zipCodes } = this.props
+    this.props.loadingTrue()
     this.props.searchBarInput(searchText, zipCodes)
   }
 
@@ -55,7 +56,7 @@ class Search extends Component {
         <CardSection style={{marginTop:15}}>
           <InputNoLab
             placeholder='Beer or Brewery'
-            value='mod'
+            value={this.props.searchText}
             onChangeText ={ this.onSearchChange }
           />
         </CardSection>
@@ -69,15 +70,16 @@ class Search extends Component {
 }
 
 mapStateToProps = state => {
-  const { searchText, zipCode, zipCodes, token } = state.auth
+  const { loading, searchText, zipCode, zipCodes, token } = state.auth
   return {
+    loading,
     searchText,
     zipCode,
     zipCodes,
     token
   }
 }
-export default connect(mapStateToProps, { searchBarInput, searchChanged, zipChanged })(Search)
+export default connect(mapStateToProps, { loadingTrue, searchBarInput, searchChanged, zipChanged })(Search)
 
 const styles = {
   container:{

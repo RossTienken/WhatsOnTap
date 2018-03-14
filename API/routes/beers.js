@@ -16,7 +16,6 @@ const capitalized = str => {
 /* GET all beers */
 router.get('/', function(req, res, next){
   knex('beers')
-  .select('*')
   .then((data)=>{
     res.send(data)
   })
@@ -29,7 +28,6 @@ router.get('/', function(req, res, next){
 router.get('/:name', function(req, res, next){
   let name = req.params.name
   knex('beers')
-  .select('*')
   .where('name', capitalized(name))
   .then((data)=>{
     res.send(data)

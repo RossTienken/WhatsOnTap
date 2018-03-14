@@ -1,6 +1,6 @@
-import { EMAIL_CHANGED, PASSWORD_CHANGED, LOGIN_USER_SUCCESS, LOGIN_USER_FAIL, LOGIN_USER, SEARCH_BEERS, SEARCH_CHANGED, ZIP_CHANGED, GET_ZIPS, GET_LABELS } from '../actions/types'
+import { EMAIL_CHANGED, PASSWORD_CHANGED, LOGIN_USER_SUCCESS, LOGIN_USER_FAIL, LOGIN_USER, SEARCH_BEERS, SEARCH_CHANGED, ZIP_CHANGED, GET_ZIPS, LOADING_TRUE, LOADING_FALSE } from '../actions/types'
 
-import { filtBeer, filtBrew, labs, zipCs } from '../../default'
+import { filtBeer, filtBrew, labs, zipCs, filtBrewNames } from '../../default'
 
 const INITIAL_STATE = {
   token: '',
@@ -14,7 +14,8 @@ const INITIAL_STATE = {
   filteredBeers: filtBeer,
   filteredBreweries: filtBrew,
   searchText: 'mod',
-  labels: labs
+  labels: labs,
+  breweryNames: filtBrewNames
 }
 
 export default (state = INITIAL_STATE, action) => {
@@ -29,12 +30,16 @@ export default (state = INITIAL_STATE, action) => {
     return { ...state, error: 'Authentication Failed.', loading:false }
     case LOGIN_USER:
     return {...state, loading: true, error: '',}
+    case LOADING_TRUE:
+    return {...state, loading: true}
+    case LOADING_FALSE:
+    return {...state, loading: false}
     case SEARCH_CHANGED:
     return { ...state, searchText: action.payload }
     case ZIP_CHANGED:
     return { ...state, zipCode: action.payload }
     case SEARCH_BEERS:
-    return { ...state, filteredBeers: action.payload.beersFiltered, filteredBreweries: action.payload.breweriesFiltered, labels: action.payload.labels }
+    return { ...state, filteredBeers: action.payload.beersFiltered, filteredBreweries: action.payload.breweriesFiltered, labels: action.payload.labels, breweryNames: action.payload.brewNames }
     default:
      return state
   }

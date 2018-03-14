@@ -7,7 +7,7 @@ import { Container, Header, Content, Tab, Tabs, TabHeading, Icon, StyleProvider 
 import getTheme from '../../native-base-theme/components'
 import platform from '../../native-base-theme/variables/platform'
 
-import Search from './Search'
+import SearchNav from './SearchNav'
 import Results from './Results'
 import Logout from './Logout'
 
@@ -21,13 +21,13 @@ class TabNavigator extends Component {
             initialPage={0}
             tabBarPosition='bottom'
           >
-          <Tab heading={<TabHeading><Icon style={styles.mugStyle} name="ios-beer-outline" /></TabHeading>} tabStyle={{backgroundColor: '#000'}}>
+          <Tab heading={<TabHeading><Icon style={styles.mugStyle} name="ios-beer-outline" /><Text style={styles.textStyle}>Results</Text></TabHeading>} tabStyle={{backgroundColor: '#000'}}>
             <Results />
           </Tab>
-          <Tab heading={<TabHeading><Icon style={styles.searchStyle} name="ios-search" /></TabHeading>} tabStyle={{backgroundColor: '#000'}}>
-            <Search />
+          <Tab heading={<TabHeading><Icon style={styles.searchStyle} name="ios-search" /><Text style={styles.textStyle}>Search</Text></TabHeading>} tabStyle={{backgroundColor: '#000'}}>
+            <SearchNav />
           </Tab>
-          <Tab heading={<TabHeading><Icon style={styles.searchStyle} name="log-out" /></TabHeading>} tabStyle={{backgroundColor: '#000'}}>
+          <Tab heading={<TabHeading><Icon style={styles.searchStyle} name="log-out" /><Text style={styles.textStyle}>Logout</Text></TabHeading>} tabStyle={{backgroundColor: '#000'}}>
             <Logout />
           </Tab>
        </Tabs>
@@ -42,7 +42,13 @@ const styles ={
     color:'white'
   },
   mugStyle:{
-    color:'gold'
+    color:'gold',
+    fontSize: 30
+  },
+  textStyle:{
+    color: 'white',
+    fontSize: 20,
+    marginLeft: 10
   }
 }
 

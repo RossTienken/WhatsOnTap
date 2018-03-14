@@ -3,7 +3,7 @@ import { Scene, Router, Actions } from 'react-native-router-flux'
 
 import LoginForm from './LoginForm'
 import TabNavigator from './TabNavigator'
-import Search from './Search'
+import SearchBeer from './SearchBeer'
 
 const FluxRouter=()=>{
   return (
@@ -22,7 +22,7 @@ const FluxRouter=()=>{
         <Scene key="search"
           hideNavBar
           navBar={null}
-          component={ Search }
+          component={ SearchBeer }
           />
       </Scene>
     </Router>

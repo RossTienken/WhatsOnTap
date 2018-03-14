@@ -4,7 +4,7 @@ import { apiKey } from '../../firebaseConfig'
 import { labs } from '../../default'
 
 
-import { SEARCH_CHANGED, SEARCH_BEERS, SEARCH_BREWERIES, LOADING_TRUE, LOADING_FALSE } from './types'
+import { LOADING_TRUE, LOADING_FALSE, SEARCH_CHANGED, SEARCH_BEERS, SEARCH_BREWERIES, SEARCH_LOCAL, ZIP_CHANGED  } from './types'
 
 export const searchChanged = (text) => {
   return {
@@ -13,10 +13,43 @@ export const searchChanged = (text) => {
   }
 }
 
+// ZIP ACTIONS //
+
+export const zipChanged = (text) => {
+  return {
+    type: ZIP_CHANGED,
+    payload: text
+  }
+}
+
+export const searchLocal = (zipCode) => {
+  let zip = parseInt(zipCode)
+  let breweriesFiltered
+  axios.get(`https://www.zipcodeapi.com/rest/U0TbVzcpXEiHWVtND365I6iDWFJjAQnolonrdqRVuHRiOSgDDz2RbG8Zi0eEvdL4/radius.json/${zip}/7/mile?minimal`)
+    .then(zipData => {
+      let zips = zipData.data.zip_codes
+      axios.get('http://localhost:3000/breweries')
+        .then(response => {
+          breweriesFiltered = response.data.filter(brew => {
+            return (zipCodes.includes(brew.code))
+          })
+          dispatch({
+            type: SEARCH_LOCAL,
+            payload: { breweriesFiltered }
+          })
+        })
+        .catch( error => {
+          console.log('error from apiGetRequest ==>', error);
+        })
+    })
+    .catch( error => {
+      console.log('error from apiGetRequest ==>', error);
+    })
+}
+
 export const searchBarInput = (text, zipCodes) => {
   return (dispatch)=>{
     let beersFiltered
-    let breweriesFiltered
     let labels = {}
     let brewNames = {}
 
@@ -25,15 +58,6 @@ export const searchBarInput = (text, zipCodes) => {
         beersFiltered = response.data.filter(beer => {
           return (beer.name.toLowerCase().includes(text.toLowerCase()))
         })
-        axios.get('http://localhost:3000/breweries')
-          .then(response => {
-            breweriesFiltered = response.data.filter(brew => {
-              return (zipCodes.includes(brew.code))
-            })
-          })
-          .catch( error => {
-            console.log('error from apiGetRequest ==>', error);
-          })
         beersFiltered.map(beer => {
           /* get breweries for beers */
           axios.get(`http://localhost:3000/breweries/${beer.brewery_id}`)

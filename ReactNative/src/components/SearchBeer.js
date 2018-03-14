@@ -7,7 +7,7 @@ import  axios  from 'axios'
 import { Card, CardSection, Input, InputNoLab, Button, Toolbar, RenderUserRow, Spinner } from './common'
 import { loadingTrue, searchBarInput, searchChanged, zipChanged } from '../actions'
 
-class Search extends Component {
+class SearchBeer extends Component {
 
   componentWillMount = () => {
   }
@@ -52,10 +52,10 @@ class Search extends Component {
     return (
       <KeyboardAvoidingView behavior={"padding"} style={styles.container}>
       <ScrollView>
-      <Text style={{alignSelf:'center', textAlign:'center', fontSize:40, marginTop:65, marginBottom:20, fontWeight:'bold', color:'#e6e6e6'}}>{"Search by Beer or Brewery!"}</Text>
+      <Text style={{alignSelf:'center', textAlign:'center', fontSize:40, marginTop:65, marginBottom:20, fontWeight:'bold', color:'#e6e6e6'}}>{"Search by Beer!"}</Text>
         <CardSection style={{marginTop:15}}>
           <InputNoLab
-            placeholder='Beer or Brewery'
+            placeholder='Beer Name'
             value={this.props.searchText}
             onChangeText ={ this.onSearchChange }
           />
@@ -79,7 +79,7 @@ mapStateToProps = state => {
     token
   }
 }
-export default connect(mapStateToProps, { loadingTrue, searchBarInput, searchChanged, zipChanged })(Search)
+export default connect(mapStateToProps, { loadingTrue, searchBarInput, searchChanged, zipChanged })(SearchBeer)
 
 const styles = {
   container:{

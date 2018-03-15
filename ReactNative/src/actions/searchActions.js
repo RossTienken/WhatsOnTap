@@ -26,10 +26,10 @@ export const searchLocal = (zipCode) => {
   return (dispatch) => {
     let zip = parseInt(zipCode)
     let localFiltered
-    axios.get(`https://www.zipcodeapi.com/rest/I9jaGFPg8FC3POl0eh76DWXK68FmZy3jvLJEBf59FLP8KBS7nadoS7Bo8JoS43x2/radius.json/${zip}/15/mile?minimal`)
+    axios.get(`https://www.zipcodeapi.com/rest/5x8bH26qVHzeVoQSvVh1r5JlS9YJMuZ0cqDwu918eP760D4IPS2zdiY3DTPhQ8lM/radius.json/${zip}/15/mile?minimal`)
     .then(zipData => {
       let zipCodes = zipData.data.zip_codes
-      axios.get('http://localhost:3000/breweries')
+      axios.get('https://whats-on-tap-api.herokuapp.com/breweries')
       .then(response => {
         localFiltered = response.data.filter(brew => {
           return (zipCodes.includes(brew.code))
@@ -49,7 +49,7 @@ export const searchLocal = (zipCode) => {
 export const searchBreweries = (text) => {
   return (dispatch) => {
     let breweriesFiltered
-    axios.get('http://localhost:3000/breweries')
+    axios.get('https://whats-on-tap-api.herokuapp.com/breweries')
     .then(response => {
       breweriesFiltered = response.data.filter(brew => {
         return (brew.name.toLowerCase().includes(text.toLowerCase()))
@@ -68,14 +68,14 @@ export const searchBeers = (text) => {
     let labels = {}
     let brewNames = {}
 
-    axios.get('http://localhost:3000/beers')
+    axios.get('https://whats-on-tap-api.herokuapp.com/beers')
       .then(response => {
         beersFiltered = response.data.filter(beer => {
           return (beer.name.toLowerCase().includes(text.toLowerCase()))
         })
         beersFiltered.map(beer => {
           /* get breweries for beers */
-          axios.get(`http://localhost:3000/breweries/${beer.brewery_id}`)
+          axios.get(`https://whats-on-tap-api.herokuapp.com/breweries/${beer.brewery_id}`)
             .then(response => {
               brewNames[beer.id] = response.data.name
             })
@@ -83,8 +83,7 @@ export const searchBeers = (text) => {
               console.log('error from apiGetRequest ==>', error)
             })
           /* get beer labels */
-          let remIPA = beer.name.replace(' IPA','')
-          let name = encodeURIComponent(remIPA.trim())
+          let name = encodeURIComponent(beer.name.trim())
           axios.get(`https://api.brewerydb.com/v2/beers?name=${name}&key=${apiKey.key}`)
             .then(brewDB => {
               if(!brewDB.data.data[0].labels.large) {

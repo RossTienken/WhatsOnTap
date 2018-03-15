@@ -19,7 +19,7 @@ export const passwordChanged = (text) =>{
 }
 
 const apiGetRequest = (dispatch, token) => {
-  let getURL = `http://localhost:3000/users/${token}`
+  let getURL = `https://whats-on-tap-api.herokuapp.com/users/${token}`
   axios.get(getURL, {headers:{ 'x-access-token':token }})
   .then(response => {
     let userID = response.data.id
@@ -31,7 +31,7 @@ const apiGetRequest = (dispatch, token) => {
 }
 
 const apiPostRequest = (dispatch, token) => {
-  let postURL = 'http://localhost:3000/users'
+  let postURL = 'https://whats-on-tap-api.herokuapp.com/users'
   let postBody = { token }
   axios.post(postURL, postBody, {headers:{'x-access-token':token}})
   .then(response => {

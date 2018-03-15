@@ -112,6 +112,7 @@ class BeerListItem extends Component {
                               backgroundColor:'transparent'}}>abv:  {this.getABV(beer)}%</Text>
             </View>
           </CardRes>
+          { this.renderDescription(beer) }
         </View>
       </TouchableWithoutFeedback>
     )

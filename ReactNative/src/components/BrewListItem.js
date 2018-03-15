@@ -23,12 +23,11 @@ class BrewListItem extends Component {
     return ds.cloneWithRows(this.props.beerList[brewId])
   }
 
-  getABV = (beer) => {
-    if(beer.abv !== 0) return beer.abv
-    return 5
-  }
-
   renderRow(beer){
+    const getABV = (item) => {
+      if(item.abv !== 0) return item.abv
+      return 5
+    }
     return (
       <View style={styles.beerListStyle}>
         <View style={{ flexDirection: 'row' }}>
@@ -37,7 +36,7 @@ class BrewListItem extends Component {
         </View>
         <View style={{ flexDirection: 'row' }}>
           <Text style={{ fontSize: 16, fontWeight: 'bold' }}>Abv: </Text>
-          <Text style={{ fontSize: 16 }}>{this.getABV(beer)}%</Text>
+          <Text style={{ fontSize: 16 }}>{getABV(beer)}%</Text>
         </View>
       </View>
     )

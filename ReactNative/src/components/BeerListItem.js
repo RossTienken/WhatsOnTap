@@ -79,7 +79,7 @@ class BeerListItem extends Component {
               <Image style={{ height: '100%',
                               width: '100%',
                               position:'absolute',
-                              opacity: 0.75 }}
+                              opacity: 0.7 }}
                 source={{ uri: 'https://community.avid.com/cfs-filesystemfile.ashx/__key/CommunityServer.Components.PostAttachments/00.00.60.24.69/Sequence-01_5F00_1.jpg' }}
                 />
               <Text style={{ color:'white',

@@ -48,7 +48,7 @@ class BeerListItem extends Component {
         return (
           <View style={styles.descStyle}>
             <Text style={{ fontSize: 18, fontWeight: 'bold' }}>Details:</Text>
-            <Text>{beer.descript}</Text>
+            <Text style={{ fontSize: 16 }}>{beer.descript}</Text>
           </View>
         )
       }
@@ -112,7 +112,6 @@ class BeerListItem extends Component {
                               backgroundColor:'transparent'}}>abv:  {this.getABV(beer)}%</Text>
             </View>
           </CardRes>
-        { this.renderDescription() }
         </View>
       </TouchableWithoutFeedback>
     )

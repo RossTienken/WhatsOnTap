@@ -2,3 +2,5 @@ node_modules
 .DS_Store
 default.js
 firebaseConfig.js
+Debug-iphonesimulator
+Intermediates

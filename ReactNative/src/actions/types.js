@@ -13,6 +13,7 @@ export const SEARCH_BREWERIES = 'search_breweries'
 export const SEARCH_LOCAL = 'search_local'
 
 export const SELECT_BEER_ID = 'select_beer_id'
-
+export const SELECT_BREW_ID = 'select_BREW_id'
+export const SELECT_LOCAL_ID = 'select_LOCAL_id'
 
 export const ZIP_CHANGED = 'zip_changed'

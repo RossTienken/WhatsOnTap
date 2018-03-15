@@ -4,7 +4,7 @@ import { apiKey } from '../../firebaseConfig'
 import { labs } from '../../default'
 
 
-import { LOADING_TRUE, LOADING_FALSE, SEARCH_CHANGED, SEARCH_BEERS, SEARCH_BREWERIES, SEARCH_LOCAL, ZIP_CHANGED, SELECT_BEER_ID } from './types'
+import { LOADING_TRUE, LOADING_FALSE, SEARCH_CHANGED, SEARCH_BEERS, SEARCH_BREWERIES, SEARCH_LOCAL, ZIP_CHANGED, SELECT_BEER_ID, SELECT_BREW_ID, SELECT_LOCAL_ID } from './types'
 
 export const searchChanged = (text) => {
   return {
@@ -16,6 +16,20 @@ export const searchChanged = (text) => {
 export const selectBeerId = (beerId) => {
   return {
     type: SELECT_BEER_ID,
+    payload: beerId
+  }
+}
+
+export const selectBrewId = (beerId) => {
+  return {
+    type: SELECT_BREW_ID,
+    payload: beerId
+  }
+}
+
+export const selectLocalId = (beerId) => {
+  return {
+    type: SELECT_LOCAL_ID,
     payload: beerId
   }
 }
@@ -33,6 +47,7 @@ export const searchLocal = (zipCode) => {
   return (dispatch) => {
     let zip = parseInt(zipCode)
     let localFiltered
+    let beerList = {}
     axios.get(`https://www.zipcodeapi.com/rest/5x8bH26qVHzeVoQSvVh1r5JlS9YJMuZ0cqDwu918eP760D4IPS2zdiY3DTPhQ8lM/radius.json/${zip}/15/mile?minimal`)
     .then(zipData => {
       let zipCodes = zipData.data.zip_codes
@@ -41,7 +56,17 @@ export const searchLocal = (zipCode) => {
         localFiltered = response.data.filter(brew => {
           return (zipCodes.includes(brew.code))
         })
-        timedLocal(dispatch, localFiltered)
+        localFiltered.map(brewery => {
+          axios.get('https://whats-on-tap-api.herokuapp.com/beers')
+          .then(response => {
+            beerList[brewery.id] = response.data.filter(beer => {
+              return (beer.brewery_id === brewery.id)
+            })
+          })
+        })
+      })
+      .then(() => {
+        timedLocal(dispatch, localFiltered, beerList)
       })
       .catch( error => {
         console.log('error from apiGetRequest ==>', error);
@@ -56,12 +81,23 @@ export const searchLocal = (zipCode) => {
 export const searchBreweries = (text) => {
   return (dispatch) => {
     let breweriesFiltered
+    let beerList = {}
     axios.get('https://whats-on-tap-api.herokuapp.com/breweries')
     .then(response => {
       breweriesFiltered = response.data.filter(brew => {
         return (brew.name.toLowerCase().includes(text.toLowerCase()))
       })
-      timedBrew(dispatch, breweriesFiltered)
+      breweriesFiltered.map(brewery => {
+        axios.get('https://whats-on-tap-api.herokuapp.com/beers')
+        .then(response => {
+          beerList[brewery.id] = response.data.filter(beer => {
+            return (beer.brewery_id === brewery.id)
+          })
+        })
+      })
+    })
+    .then(() => {
+      timedBrew(dispatch, breweriesFiltered, beerList)
     })
     .catch( error => {
       console.log('error from apiGetRequest ==>', error);
@@ -127,10 +163,10 @@ const timedBeers = (dispatch, beersFiltered, labels, brewNames) => {
   }, 2000)
 }
 
-const timedBrew = (dispatch, breweriesFiltered) => {
+const timedBrew = (dispatch, breweriesFiltered, beerList) => {
   dispatch({
     type: SEARCH_BREWERIES,
-    payload: { breweriesFiltered }
+    payload: { breweriesFiltered, beerList }
   })
   setTimeout(() => {
     Actions.tabNavBrew()
@@ -139,10 +175,10 @@ const timedBrew = (dispatch, breweriesFiltered) => {
   }, 2000)
 }
 
-const timedLocal = (dispatch, localFiltered) => {
+const timedLocal = (dispatch, localFiltered, beerList) => {
   dispatch({
     type: SEARCH_LOCAL,
-    payload: { localFiltered }
+    payload: { localFiltered, beerList }
   })
   setTimeout(() => {
     Actions.tabNavLocal()

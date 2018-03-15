@@ -18,8 +18,10 @@ class SearchLocal extends Component {
 
   onButtonPress = () => {
     const { zipCode } = this.props
-    this.props.loadingTrue()
-    this.props.searchLocal(zipCode)
+    if(zipCode !== '') {
+      this.props.loadingTrue()
+      this.props.searchLocal(zipCode)
+    }
   }
 
   renderError = () => {

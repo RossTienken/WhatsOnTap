@@ -18,8 +18,10 @@ class SearchBeer extends Component {
 
   onButtonPress = () => {
     const { searchText } = this.props
-    this.props.loadingTrue()
-    this.props.searchBeers(searchText)
+    if(searchText !== '') {
+      this.props.loadingTrue()
+      this.props.searchBeers(searchText)
+    }
   }
 
   renderError = () => {

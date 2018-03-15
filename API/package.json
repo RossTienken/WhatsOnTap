@@ -4,6 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
+    "heroku-postbuild": "knex migrate:rollback; knex migrate:latest; knex seed:run;",
     "start": "nodemon index.js",
     "dev": "nodemon index.js"
   },

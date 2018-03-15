@@ -5,6 +5,7 @@ export const LOGIN_USER_FAIL = 'login_user_fail'
 export const LOGIN_USER = 'login_user'
 export const LOADING_TRUE = 'loading_true'
 export const LOADING_FALSE = 'loading_FALSE'
+export const LOGOUT = 'logout'
 
 export const SEARCH_CHANGED = 'search_changed'
 export const SEARCH_BEERS = 'search_beers'

@@ -20,15 +20,15 @@ export default (state = INITIAL_STATE, action) => {
     case LOADING_TRUE:
     return {...state, loading: true}
     case LOADING_FALSE:
-    return {...state, loading: false}
+    return {...state, searchText: '', loading: false}
     case SEARCH_CHANGED:
     return { ...state, searchText: action.payload }
     case ZIP_CHANGED:
     return { ...state, zipCode: action.payload }
     case SEARCH_BEERS:
-    return { ...state, filteredBeers: action.payload.beersFiltered, labels: action.payload.labels, breweryNames: action.payload.brewNames, searchText: '' }
+    return { ...state, filteredBeers: action.payload.beersFiltered, labels: action.payload.labels, breweryNames: action.payload.brewNames }
     case SEARCH_BREWERIES:
-    return { ...state, filteredBreweries: action.payload.breweriesFiltered, searchText: '' }
+    return { ...state, filteredBreweries: action.payload.breweriesFiltered }
     case SEARCH_LOCAL:
     return { ...state, filteredLocal: action.payload.localFiltered }
     default:

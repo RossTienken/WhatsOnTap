@@ -5,7 +5,7 @@ import { View, Text, FlatList, Image, KeyboardAvoidingView, ScrollView, Touchabl
 import { connect } from 'react-redux'
 import  axios  from 'axios'
 import { CardRes, CardSection, Input, InputNoLab, Button, Toolbar, RenderUserRow } from './common'
-import { } from '../actions'
+
 
 class ResultsBeer extends Component {
 
@@ -27,6 +27,11 @@ class ResultsBeer extends Component {
   getABV = (item) => {
     if(item.abv !== 0) return item.abv
     return 5
+  }
+
+  expand = () => {
+    console.log(this)
+
   }
 
   renderError = () => {

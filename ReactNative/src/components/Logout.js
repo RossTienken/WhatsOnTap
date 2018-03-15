@@ -4,21 +4,17 @@ import { SearchBar } from 'react-native-elements'
 import { View, Text, FlatList, Image, KeyboardAvoidingView, ScrollView, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
 import  axios  from 'axios'
-import { Card, CardSection, Input, InputNoLab, Button, Toolbar, RenderUserRow } from './common'
-import { searchBarInput, searchChanged, zipChanged } from '../actions'
+import { Button, Spinner } from './common'
+import { loadingTrue, logout } from '../actions'
 
 class Logout extends Component {
 
   componentWillMount = () => {
   }
 
-  onSearchChange = (text) => {
-    this.props.searchChanged(text)
-  }
-
   onButtonPress = () => {
-    const { searchText, zipCodes } = this.props
-    this.props.searchBarInput(searchText, zipCodes)
+    this.props.loadingTrue()
+    this.props.logout()
   }
 
   renderError = () => {
@@ -41,7 +37,7 @@ class Logout extends Component {
     } else {
       return (
         <Button onPress={ this.onButtonPress }>
-          Search
+          Logout
         </Button>
       )
     }
@@ -50,34 +46,33 @@ class Logout extends Component {
   render() {
     return (
       <KeyboardAvoidingView behavior={"padding"} style={styles.container}>
-      <ScrollView>
-      <Text style={{alignSelf:'center', textAlign:'center', fontSize:40, marginTop:65, marginBottom:20, fontWeight:'bold', color:'#e6e6e6'}}>{"Search by Beer or Brewery!"}</Text>
-        <CardSection style={{marginTop:15}}>
-          <InputNoLab
-            placeholder='Beer or Brewery'
-            value='mod'
-            onChangeText ={ this.onSearchChange }
-          />
-        </CardSection>
+      <Image style={{ height: '100%', width: '100%', position:'absolute'}} source={require('../../public/img/logoutBack.png')} />
+      <Image style={{ height: '100%',
+                      width: '100%',
+                      position:'absolute',
+                      opacity: 0.65 }}
+        source={{ uri: 'https://community.avid.com/cfs-filesystemfile.ashx/__key/CommunityServer.Components.PostAttachments/00.00.60.24.69/Sequence-01_5F00_1.jpg' }}
+        />
+        <Text style={{alignSelf:'center', textAlign:'center', fontSize:40, marginTop:85, marginBottom:20, fontWeight:'bold', color:'#e6e6e6', backgroundColor:'transparent'}}>{"Logout"}</Text>
+        <Image
+        style={{width:200,height:200, alignSelf:'center', marginBottom:20, marginTop:10}}
+        source={require('../../mugEmpty.png')}
+        />
         <View style={styles.viewStyle}>
           { this.renderButton() }
         </View>
-      </ScrollView>
-    </KeyboardAvoidingView>
+      </KeyboardAvoidingView>
     )
   }
 }
 
 mapStateToProps = state => {
-  const { searchText, zipCode, zipCodes, token } = state.auth
+  const { loading } = state.auth
   return {
-    searchText,
-    zipCode,
-    zipCodes,
-    token
+    loading
   }
 }
-export default connect(mapStateToProps, { searchBarInput, searchChanged, zipChanged })(Logout)
+export default connect(mapStateToProps, { loadingTrue, logout })(Logout)
 
 const styles = {
   container:{

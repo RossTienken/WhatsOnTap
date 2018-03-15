@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import {  View, KeyboardAvoidingView, ScrollView, Text, Image} from 'react-native'
 import { connect } from 'react-redux'
 import actions from 'react-native-router-flux'
-import { Card, Input, Button, Spinner } from './common'
+import { CardSection, Input, Button, Spinner } from './common'
 import { emailChanged, passwordChanged, loginUser, loginUserFail } from '../actions'
 
 class LoginForm extends Component {
@@ -49,13 +49,20 @@ class LoginForm extends Component {
   render(){
     return(
       <KeyboardAvoidingView behavior={"padding"} style={styles.containerStyle}>
+      <Image style={{ height: '100%', width: '100%', position:'absolute'}} source={require('../../public/img/loginBack.png')} />
+      <Image style={{ height: '100%',
+                      width: '100%',
+                      position:'absolute',
+                      opacity: 0.65 }}
+        source={{ uri: 'https://community.avid.com/cfs-filesystemfile.ashx/__key/CommunityServer.Components.PostAttachments/00.00.60.24.69/Sequence-01_5F00_1.jpg' }}
+        />
       <ScrollView>
-      <Text style={{alignSelf:'center', fontSize:50, marginTop:85, fontWeight:'bold', color:'#e6e6e6'}}>{"What's On Tap?"}</Text>
+      <Text style={{alignSelf:'center', fontSize:50, marginTop:85, fontWeight:'bold', color:'#e6e6e6', backgroundColor: 'transparent'}}>{"What's On Tap?"}</Text>
       <Image
       style={{width:200,height:200, alignSelf:'center', marginBottom:20, marginTop:10}}
       source={require('../../mug.png')}
       />
-        <Card style={{marginTop:15}}>
+        <CardSection style={{marginTop:15}}>
           <Input
             label='Email'
             placeholder='email@gmail.com'
@@ -63,8 +70,8 @@ class LoginForm extends Component {
             onChangeText ={ this.onEmailChange.bind(this) }
             value ={ this.props.email }
             />
-        </Card>
-        <Card>
+        </CardSection>
+        <CardSection>
           <Input
             secureTextEntry
             label='Password'
@@ -73,7 +80,7 @@ class LoginForm extends Component {
             onChangeText={ this.onPasswordChange.bind(this) }
             value ={ this.props.password }
             />
-        </Card>
+        </CardSection>
           { this.renderError() }
         <View style={styles.viewStyle}>
           { this.renderButton() }

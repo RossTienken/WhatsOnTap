@@ -1,4 +1,4 @@
-import { EMAIL_CHANGED, PASSWORD_CHANGED, LOGIN_USER_SUCCESS, LOGIN_USER_FAIL, LOGIN_USER, LOADING_TRUE, LOADING_FALSE } from '../actions/types'
+import { EMAIL_CHANGED, PASSWORD_CHANGED, LOGIN_USER_SUCCESS, LOGIN_USER_FAIL, LOGIN_USER, LOADING_TRUE, LOADING_FALSE, LOGOUT } from '../actions/types'
 
 const INITIAL_STATE = {
   token: '',
@@ -26,6 +26,8 @@ export default (state = INITIAL_STATE, action) => {
     return {...state, loading: true}
     case LOADING_FALSE:
     return {...state, loading: false}
+    case LOGOUT:
+    return {...state, ...INITIAL_STATE}
     default:
      return state
   }

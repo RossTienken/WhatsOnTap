@@ -1,4 +1,4 @@
-import { SEARCH_BEERS, SEARCH_BREWERIES, SEARCH_LOCAL, SEARCH_CHANGED, ZIP_CHANGED, LOADING_TRUE, LOADING_FALSE } from '../actions/types'
+import { SEARCH_BEERS, SEARCH_BREWERIES, SEARCH_LOCAL, SEARCH_CHANGED, ZIP_CHANGED, LOADING_TRUE, LOADING_FALSE, SELECT_BEER_ID } from '../actions/types'
 
 import { filtBeer, filtBrew, labs, zipCs, filtBrewNames } from '../../default'
 
@@ -12,7 +12,8 @@ const INITIAL_STATE = {
   filteredLocal: '',
   searchText: '',
   labels: labs,
-  breweryNames: ''
+  breweryNames: '',
+  selectedBeerId: ''
 }
 
 export default (state = INITIAL_STATE, action) => {
@@ -31,6 +32,8 @@ export default (state = INITIAL_STATE, action) => {
     return { ...state, filteredBreweries: action.payload.breweriesFiltered }
     case SEARCH_LOCAL:
     return { ...state, filteredLocal: action.payload.localFiltered }
+    case SELECT_BEER_ID:
+    return {...state, selectedBeerId: action.payload}
     default:
      return state
   }

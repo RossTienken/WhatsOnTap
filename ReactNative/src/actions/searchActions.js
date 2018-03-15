@@ -4,12 +4,19 @@ import { apiKey } from '../../firebaseConfig'
 import { labs } from '../../default'
 
 
-import { LOADING_TRUE, LOADING_FALSE, SEARCH_CHANGED, SEARCH_BEERS, SEARCH_BREWERIES, SEARCH_LOCAL, ZIP_CHANGED  } from './types'
+import { LOADING_TRUE, LOADING_FALSE, SEARCH_CHANGED, SEARCH_BEERS, SEARCH_BREWERIES, SEARCH_LOCAL, ZIP_CHANGED, SELECT_BEER_ID } from './types'
 
 export const searchChanged = (text) => {
   return {
     type: SEARCH_CHANGED,
     payload: text
+  }
+}
+
+export const selectBeerId = (beerId) => {
+  return {
+    type: SELECT_BEER_ID,
+    payload: beerId
   }
 }
 
@@ -84,7 +91,8 @@ export const searchBeers = (text) => {
             })
           /* get beer labels */
           let name = encodeURIComponent(beer.name.trim())
-          axios.get(`https://api.brewerydb.com/v2/beers?name=${name}&key=${apiKey.key}`)
+          /* Use apiKey for actual api search*/
+          axios.get(`https://api.brewerydb.com/v2/beers?name=${name}&key=x`)
             .then(brewDB => {
               if(!brewDB.data.data[0].labels.large) {
                 labels[beer.id] = 'https://cdn.pixabay.com/photo/2012/04/13/00/58/hops-31495_960_720.png'

@@ -48,7 +48,7 @@ export const searchLocal = (zipCode) => {
     let zip = parseInt(zipCode)
     let localFiltered
     let beerList = {}
-    axios.get(`https://www.zipcodeapi.com/rest/5x8bH26qVHzeVoQSvVh1r5JlS9YJMuZ0cqDwu918eP760D4IPS2zdiY3DTPhQ8lM/radius.json/${zip}/15/mile?minimal`)
+    axios.get(`https://www.zipcodeapi.com/rest/3ppekBdM55qFBHQ8FzCg9DEoanf2uutG8a9uphfDtRl2GMHq8V9hWMT8JGflEIlX/radius.json/${zip}/15/mile?minimal`)
     .then(zipData => {
       let zipCodes = zipData.data.zip_codes
       axios.get('https://whats-on-tap-api.herokuapp.com/breweries')
@@ -127,8 +127,9 @@ export const searchBeers = (text) => {
             })
           /* get beer labels */
           let name = encodeURIComponent(beer.name.trim())
+          name = name.replace("'", '%27')
           /* Use apiKey for actual api search*/
-          axios.get(`https://api.brewerydb.com/v2/beers?name=${name}&key=x`)
+          axios.get(`https://api.brewerydb.com/v2/beers?name=${name}&key=${apiKey}`)
             .then(brewDB => {
               if(!brewDB.data.data[0].labels.large) {
                 labels[beer.id] = 'https://cdn.pixabay.com/photo/2012/04/13/00/58/hops-31495_960_720.png'

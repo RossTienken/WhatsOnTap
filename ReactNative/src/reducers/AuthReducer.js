@@ -2,12 +2,11 @@ import { EMAIL_CHANGED, PASSWORD_CHANGED, LOGIN_USER_SUCCESS, LOGIN_USER_FAIL, L
 
 const INITIAL_STATE = {
   token: '',
-  email: 'ross@ross.com',
-  password: 'password',
+  email: '',
+  password: '',
   userID: null,
   error: '',
-  loading: false,
-  searchText: 'mod'
+  loading: false
 }
 
 export default (state = INITIAL_STATE, action) => {

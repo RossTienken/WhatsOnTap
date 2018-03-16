@@ -27,6 +27,7 @@ class ResultsLocal extends Component {
             style={{ marginTop: 25 }}
             dataSource={this.dataSource}
             renderRow={ this.renderRow }
+            enableEmptySections={true}
           />
         </ScrollView>
       </KeyboardAvoidingView>

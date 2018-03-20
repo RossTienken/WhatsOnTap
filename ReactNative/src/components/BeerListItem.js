@@ -34,6 +34,15 @@ class BeerListItem extends Component {
     return 5
   }
 
+  isSelected = (id) => {
+    if(this.props.selectedBeerId === id) {
+      this.props.selectBeerId(id, true)
+    }
+    else {
+      this.props.selectBeerId(id, false)
+    }
+  }
+
   renderDescription(){
     const { beer, expanded } = this.props
     if(expanded) {
@@ -71,7 +80,7 @@ class BeerListItem extends Component {
     const { id } = this.props.beer
     const { beer } = this.props
     return (
-      <TouchableWithoutFeedback onPress={ () => this.props.selectBeerId(id) }>
+      <TouchableWithoutFeedback onPress={ () => this.isSelected(id) }>
         <View>
           <CardRes>
             <View>
@@ -120,12 +129,13 @@ class BeerListItem extends Component {
 }
 
 mapStateToProps = (state, ownProps) => {
-  const expanded = state.search.selectedBeerId === ownProps.beer.id
-  const { breweryNames, filteredBeers, labels } = state.search
+  const { breweryNames, filteredBeers, labels, selectedBeerId } = state.search
+  const expanded = selectedBeerId === ownProps.beer.id
   return {
     breweryNames,
     labels,
-    expanded
+    expanded,
+    selectedBeerId
   }
 }
 export default connect(mapStateToProps, { selectBeerId })(BeerListItem)

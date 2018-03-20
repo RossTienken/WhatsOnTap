@@ -13,24 +13,42 @@ export const searchChanged = (text) => {
   }
 }
 
-export const selectBeerId = (beerId) => {
+export const selectBeerId = (beerId, selected) => {
+  if (selected) {
+    return {
+      type: SELECT_BEER_ID,
+      payload: ''
+    }
+  }
   return {
     type: SELECT_BEER_ID,
     payload: beerId
   }
 }
 
-export const selectBrewId = (beerId) => {
+export const selectBrewId = (brewId, selected) => {
+  if (selected) {
+    return {
+      type: SELECT_BREW_ID,
+      payload: ''
+    }
+  }
   return {
     type: SELECT_BREW_ID,
-    payload: beerId
+    payload: brewId
   }
 }
 
-export const selectLocalId = (beerId) => {
+export const selectLocalId = (localId, selected) => {
+  if (selected) {
+    return {
+      type: SELECT_LOCAL_ID,
+      payload: ''
+    }
+  }
   return {
     type: SELECT_LOCAL_ID,
-    payload: beerId
+    payload: localId
   }
 }
 
@@ -48,7 +66,7 @@ export const searchLocal = (zipCode) => {
     let zip = parseInt(zipCode)
     let localFiltered
     let beerList = {}
-    axios.get(`https://www.zipcodeapi.com/rest/3ppekBdM55qFBHQ8FzCg9DEoanf2uutG8a9uphfDtRl2GMHq8V9hWMT8JGflEIlX/radius.json/${zip}/15/mile?minimal`)
+    axios.get(`https://www.zipcodeapi.com/rest/9ePoLFxiX3Ca01FoGsi72cAcQaCy3s4cT02AZgGE1tMgOSM8WhKXGp2Ir4hnSsbG/radius.json/${zip}/15/mile?minimal`)
     .then(zipData => {
       let zipCodes = zipData.data.zip_codes
       axios.get('https://whats-on-tap-api.herokuapp.com/breweries')

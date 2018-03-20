@@ -42,6 +42,6 @@ export default (state = INITIAL_STATE, action) => {
     case SELECT_LOCAL_ID:
     return {...state, selectedLocalId: action.payload}
     default:
-     return state
+      return state
   }
 }

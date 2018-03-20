@@ -23,6 +23,15 @@ class LocalListItem extends Component {
     return ds.cloneWithRows(this.props.beerList[brewId])
   }
 
+  isSelected = (id) => {
+    if(this.props.selectedLocalId === id) {
+      this.props.selectLocalId(id, true)
+    }
+    else {
+      this.props.selectLocalId(id, false)
+    }
+  }
+
   renderRow(beer){
     const getABV = (item) => {
       if(item.abv !== 0) return item.abv
@@ -82,7 +91,7 @@ class LocalListItem extends Component {
     const { id } = this.props.localBrew
     const { localBrew } = this.props
     return (
-      <TouchableWithoutFeedback onPress={ () => this.props.selectLocalId(id) }>
+      <TouchableWithoutFeedback onPress={ () => this.isSelected(id) }>
         <View>
           <CardRes>
             <View>
@@ -142,12 +151,13 @@ class LocalListItem extends Component {
 }
 
 mapStateToProps = (state, ownProps) => {
-  const expanded = state.search.selectedLocalId === ownProps.localBrew.id
-  const { filteredLocal, beerList } = state.search
+  const { filteredLocal, beerList, selectedLocalId } = state.search
+  const expanded = selectedLocalId === ownProps.localBrew.id
   return {
     filteredLocal,
     beerList,
-    expanded
+    expanded,
+    selectedLocalId
   }
 }
 export default connect(mapStateToProps, { selectLocalId })(LocalListItem)

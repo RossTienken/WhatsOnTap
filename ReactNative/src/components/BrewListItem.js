@@ -23,6 +23,15 @@ class BrewListItem extends Component {
     return ds.cloneWithRows(this.props.beerList[brewId])
   }
 
+  isSelected = (id) => {
+    if(this.props.selectedBrewId === id) {
+      this.props.selectBrewId(id, true)
+    }
+    else {
+      this.props.selectBrewId(id, false)
+    }
+  }
+
   renderRow(beer){
     const getABV = (item) => {
       if(item.abv !== 0) return item.abv
@@ -84,7 +93,7 @@ class BrewListItem extends Component {
     const { id } = this.props.brewery
     const { brewery } = this.props
     return (
-      <TouchableWithoutFeedback onPress={ () => this.props.selectBrewId(id) }>
+      <TouchableWithoutFeedback onPress={ () => this.isSelected(id) }>
         <View>
           <CardRes>
             <View>
@@ -144,12 +153,13 @@ class BrewListItem extends Component {
 }
 
 mapStateToProps = (state, ownProps) => {
-  const expanded = state.search.selectedBrewId === ownProps.brewery.id
-  const { filteredBreweries, beerList } = state.search
+  const { filteredBreweries, beerList, selectedBrewId } = state.search
+  const expanded = selectedBrewId === ownProps.brewery.id
   return {
     filteredBreweries,
     beerList,
-    expanded
+    expanded,
+    selectedBrewId
   }
 }
 export default connect(mapStateToProps, { selectBrewId })(BrewListItem)

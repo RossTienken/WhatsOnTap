@@ -1,7 +1,5 @@
 import { SEARCH_BEERS, SEARCH_BREWERIES, SEARCH_LOCAL, SEARCH_CHANGED, ZIP_CHANGED, LOADING_TRUE, LOADING_FALSE, SELECT_BEER_ID, SELECT_BREW_ID, SELECT_LOCAL_ID } from '../actions/types'
 
-import { filtBeer, filtBrew, labs, zipCs, filtBrewNames } from '../../default'
-
 const INITIAL_STATE = {
   zipCode: '',
   zipCodes: '',

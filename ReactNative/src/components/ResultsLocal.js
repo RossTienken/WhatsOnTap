@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { View, Text, ListView, Image, KeyboardAvoidingView, ScrollView, TouchableWithoutFeedback } from 'react-native'
-import { connect } from 'react-redux';
+import { connect } from 'react-redux'
 import LocalListItem from './LocalListItem'
 
 class ResultsLocal extends Component {

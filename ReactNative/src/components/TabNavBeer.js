@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import {View, Text, Button } from 'react-native'
 import { Scene, Router, Actions } from 'react-native-router-flux'
 
-import { Container, Header, Content, Tab, Tabs, TabHeading, Icon, StyleProvider } from 'native-base'
+import { Container, Header, Tab, Tabs, TabHeading, Icon, StyleProvider } from 'native-base'
 
 import getTheme from '../../native-base-theme/components'
 import platform from '../../native-base-theme/variables/platform'

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import { Container, Header, Content, Footer, FooterTab, Icon} from 'native-base';
+import { Container, Header, Content, Icon} from 'native-base'
 import { SearchBar } from 'react-native-elements'
-import { View, Text, FlatList, Image, KeyboardAvoidingView, LayoutAnimation, ScrollView, TouchableWithoutFeedback } from 'react-native'
+import { View, Text, Image, KeyboardAvoidingView, LayoutAnimation, ScrollView, TouchableWithoutFeedback } from 'react-native'
 import { connect } from 'react-redux'
 import  axios  from 'axios'
 import { CardRes, Input, InputNoLab, Button, Toolbar, RenderUserRow } from './common'

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {View, Text, Button } from 'react-native'
+import {View, Text, Button, StatusBar } from 'react-native'
 import { Scene, Router, Actions } from 'react-native-router-flux'
 
 import { Container, Header, Content, Tab, Tabs, TabHeading, Icon, StyleProvider } from 'native-base'
@@ -16,6 +16,7 @@ class TabNavLocal extends Component {
     return(
       <StyleProvider style={getTheme(platform)}>
         <Container>
+          <StatusBar hidden={true} />
           <Tabs
             tabBarUnderlineStyle={{backgroundColor:'gold'}}
             initialPage={0}

@@ -66,7 +66,7 @@ export const searchLocal = (zipCode) => {
     let zip = parseInt(zipCode)
     let localFiltered
     let beerList = {}
-    axios.get(`https://www.zipcodeapi.com/rest/9ePoLFxiX3Ca01FoGsi72cAcQaCy3s4cT02AZgGE1tMgOSM8WhKXGp2Ir4hnSsbG/radius.json/${zip}/15/mile?minimal`)
+    axios.get(`https://www.zipcodeapi.com/rest/uPrrobKfIfiqb6Z0zUHSbIsEO5va18sVvcg66Ik0LlYCgNURmVzJnNeVoqQWyFOs/radius.json/${zip}/15/mile?minimal`)
     .then(zipData => {
       let zipCodes = zipData.data.zip_codes
       axios.get('https://whats-on-tap-api.herokuapp.com/breweries')

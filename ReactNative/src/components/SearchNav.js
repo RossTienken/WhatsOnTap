@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {View, Text, Button } from 'react-native'
+import {View, Text, Button, StatusBar } from 'react-native'
 import { Scene, Router, Actions } from 'react-native-router-flux'
 
 import { Container, Header, Content, Tab, Tabs, TabHeading, Title, Icon, StyleProvider } from 'native-base'
@@ -18,7 +18,8 @@ class SearchNav extends Component {
     return(
       <StyleProvider style={getTheme(platform)}>
         <Container>
-          <Header hasTabs style={{ backgroundColor: 'black'}}>
+          <StatusBar hidden={true} />
+          <Header hasTabs style={{ height: 60, backgroundColor: 'black'}}>
             <Title style={styles.headerTitle}>Search By...</Title>
           </Header>
           <Tabs
@@ -50,7 +51,7 @@ const styles ={
     color: 'white',
     fontSize: 22,
     fontWeight: 'bold',
-    marginTop: 15
+    marginTop: 10
   },
   textStyle:{
     color: 'white',

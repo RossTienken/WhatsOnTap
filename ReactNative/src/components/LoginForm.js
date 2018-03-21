@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {  View, KeyboardAvoidingView, ScrollView, Text, Image} from 'react-native'
+import {  View, KeyboardAvoidingView, ScrollView, Text, Image, StatusBar} from 'react-native'
 import { connect } from 'react-redux'
 import actions from 'react-native-router-flux'
 import { CardSection, Input, Button, Spinner } from './common'
@@ -49,19 +49,20 @@ class LoginForm extends Component {
   render(){
     return(
       <KeyboardAvoidingView behavior={"padding"} style={styles.containerStyle}>
-      <Image style={{ height: '100%', width: '100%', position:'absolute'}} source={require('../../public/img/loginBack.png')} />
-      <Image style={{ height: '100%',
+      <StatusBar hidden={true} />
+        <Image style={{ height: '100%', width: '100%', position:'absolute'}} source={require('../../public/img/loginBack.png')} />
+        <Image style={{ height: '100%',
                       width: '100%',
                       position:'absolute',
                       opacity: 0.65 }}
-        source={{ uri: 'https://community.avid.com/cfs-filesystemfile.ashx/__key/CommunityServer.Components.PostAttachments/00.00.60.24.69/Sequence-01_5F00_1.jpg' }}
+                      source={{ uri: 'https://community.avid.com/cfs-filesystemfile.ashx/__key/CommunityServer.Components.PostAttachments/00.00.60.24.69/Sequence-01_5F00_1.jpg' }}
         />
-      <ScrollView>
-      <Text style={{alignSelf:'center', fontSize:50, marginTop:85, fontWeight:'bold', color:'#e6e6e6', backgroundColor: 'transparent'}}>{"What's On Tap?"}</Text>
-      <Image
-      style={{width:200,height:200, alignSelf:'center', marginBottom:20, marginTop:10}}
-      source={require('../../mug.png')}
-      />
+        <ScrollView>
+        <Text style={{alignSelf:'center', fontSize:50, marginTop:85, fontWeight:'bold', color:'#e6e6e6', backgroundColor: 'transparent'}}>{"What's On Tap?"}</Text>
+        <Image
+        style={{width:200,height:200, alignSelf:'center', marginBottom:20, marginTop:10}}
+        source={require('../../mug.png')}
+        />
         <CardSection style={{marginTop:15}}>
           <Input
             label='Email'

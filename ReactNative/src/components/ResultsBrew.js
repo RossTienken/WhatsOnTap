@@ -24,7 +24,7 @@ class ResultsBrew extends Component {
       backgroundColor:'black' }}>
         <ScrollView>
           <ListView
-            style={{ marginTop: 25 }}
+            style={{ marginTop: 0 }}
             dataSource={this.dataSource}
             renderRow={ this.renderRow }
             enableEmptySections={true}
